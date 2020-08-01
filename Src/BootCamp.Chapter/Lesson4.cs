@@ -8,11 +8,8 @@ namespace BootCamp.Chapter
 {
     class Lesson4
     {
-        public static float globalHeight = 0f;
-        public static float globalWeight = 0f;
-        public static string bmiError = "Failed calculating BMI. Reason:";
-
-        public static string Information()
+        
+        public static string AskInformation()
         {
             Console.WriteLine("Testing");
             string firstName = Console.ReadLine();
@@ -45,44 +42,50 @@ namespace BootCamp.Chapter
 
         }
 
-        public static float Weight()
+        public static float Weight = 0f;
+        public static float AskWeight()
         {
             Console.WriteLine("What is your weight in kgs?");
             string sWeight = Console.ReadLine();
 
-            bool isNumber = float.TryParse(sWeight, out globalWeight);
+            bool isNumber = float.TryParse(sWeight, out Weight);
 
             if (!isNumber)
                 {
-                    Console.WriteLine(globalWeight + " is not a valid number.");    
+                    Console.WriteLine(Weight + " is not a valid number.");    
                     return -1; 
                 }
-            if (globalWeight == 0) return 0;
-            if (globalWeight >= 0) return globalWeight;
+            if (Weight == 0) return 0;
+            if (Weight >= 0) return Weight;
 
             return 0;
         }
 
-        public static float Height()
+        public static float Height = 0f;
+        public static float AskHeight()
         {
             Console.WriteLine("Testing");
             string sHeight = Console.ReadLine();
 
-            bool isNumber = float.TryParse(sHeight, out globalHeight);
+            bool isNumber = float.TryParse(sHeight, out Height);
 
             if (!isNumber)
             {
                 Console.WriteLine("\"" + sHeight + "\"" + " is not a valid number.");
                 return -1;
             }
-            if (globalHeight == 0) return 0;
-            if (globalHeight >= 0) return globalHeight;
+            if (Height == 0) return 0;
+            if (Height >= 0) return Height;
 
             return 0;
         }
 
+       
+
         public static float BMIFormula(float weight, float height)
         {
+            string bmiError = "Failed calculating BMI. Reason:";
+
             if (weight <= 0 && height <= 0)
             {
                 Console.WriteLine(bmiError + Environment.NewLine + "Weight cannot be equal or less than zero, but was " + weight + ".");
@@ -112,8 +115,8 @@ namespace BootCamp.Chapter
 
         public static void Message()
         {
-            Console.WriteLine(Lesson4.Information() + " is " + Lesson4.AskAge() + " years old, their weight in kg is " + Lesson4.Weight()
-            + " and their height in cm is " + Lesson4.Height() + ". " + "Their BMI is " + Lesson4.BMIFormula(globalWeight, globalHeight));
+            Console.WriteLine(Lesson4.AskInformation() + " is " + Lesson4.AskAge() + " years old, their weight in kg is " + Lesson4.AskWeight()
+            + " and their height in cm is " + Lesson4.AskHeight() + ". " + "Their BMI is " + Lesson4.BMIFormula(Weight, Height));
         }
     }
 }
