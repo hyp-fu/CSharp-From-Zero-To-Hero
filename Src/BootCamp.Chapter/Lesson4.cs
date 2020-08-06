@@ -9,80 +9,72 @@ namespace BootCamp.Chapter
     class Lesson4
     {
         
-        public static string AskInformation()
+        public static string PromptString()
         {
             Console.WriteLine("Testing");
-            string firstName = Console.ReadLine();
+            string name = Console.ReadLine();
             string errorMsg = "Name cannot be empty.";
 
-            if (String.IsNullOrEmpty(firstName))
+            if (String.IsNullOrEmpty(name))
             {
                 Console.WriteLine(errorMsg);
-                return errorMsg;
+                return "-";
             }
             else
             {
-                return firstName;
+                return name;
             }
         }
 
-        public static int AskAge()
+        public static int PromptInt()
         {
             Console.WriteLine("Testing");
-            string sAge = Console.ReadLine();
+            string stringInt = Console.ReadLine();
 
-            int age;
-            bool isNumber = int.TryParse(sAge, out age);
+            int convertedInt;
+            bool isNumber = int.TryParse(stringInt, out convertedInt);
 
-            if (!isNumber) return -1;
-            if (age == 0) return 0;
-            if (age >= 0) return age;
-
-            return 0;
-
-        }
-
-        public static float Weight = 0f;
-        public static float AskWeight()
-        {
-            Console.WriteLine("What is your weight in kgs?");
-            string sWeight = Console.ReadLine();
-
-            bool isNumber = float.TryParse(sWeight, out Weight);
-
-            if (!isNumber)
-                {
-                    Console.WriteLine(Weight + " is not a valid number.");    
-                    return -1; 
-                }
-            if (Weight == 0) return 0;
-            if (Weight >= 0) return Weight;
-
-            return 0;
-        }
-
-        public static float Height = 0f;
-        public static float AskHeight()
-        {
-            Console.WriteLine("Testing");
-            string sHeight = Console.ReadLine();
-
-            bool isNumber = float.TryParse(sHeight, out Height);
-
+            if (String.IsNullOrEmpty(stringInt))
+            {
+                return 0;
+            }
             if (!isNumber)
             {
-                Console.WriteLine("\"" + sHeight + "\"" + " is not a valid number.");
+                Console.WriteLine("\"" + stringInt + "\"" + " is not a valid number.");
                 return -1;
             }
-            if (Height == 0) return 0;
-            if (Height >= 0) return Height;
+            if (convertedInt == 0) return 0;
+            if (convertedInt >= 0) return convertedInt;
+
+            return 0;
+
+        }
+
+        public static float PromptFloat()
+        {
+            Console.WriteLine("Testing");
+            string stringFloat = Console.ReadLine();
+
+            float convertedFloat;
+
+            bool isNumber = float.TryParse(stringFloat, out convertedFloat);
+
+            if (String.IsNullOrEmpty(stringFloat))
+            {
+                return 0;
+            }
+            if (!isNumber)
+                {
+                    Console.WriteLine("\"" + stringFloat + "\"" + " is not a valid number.");    
+                    return -1; 
+                }
+            if (convertedFloat == 0) return 0;
+            if (convertedFloat >= 0) return convertedFloat;
 
             return 0;
         }
 
-       
-
-        public static float BMIFormula(float weight, float height)
+        public static float PromptBmi(float weight, float height)
         {
             string bmiError = "Failed calculating BMI. Reason:";
 
@@ -115,8 +107,14 @@ namespace BootCamp.Chapter
 
         public static void Message()
         {
-            Console.WriteLine(Lesson4.AskInformation() + " is " + Lesson4.AskAge() + " years old, their weight in kg is " + Lesson4.AskWeight()
-            + " and their height in cm is " + Lesson4.AskHeight() + ". " + "Their BMI is " + Lesson4.BMIFormula(Weight, Height));
+            string name = PromptString();
+            int age = PromptInt();
+            float weight = PromptFloat();
+            float height = PromptFloat();
+            float bmi = PromptBmi(weight, height);
+
+            Console.WriteLine(name + " is " + age + " years old, they weigh " + weight + " kgs, are " + height + " cms tall, and their bmi is " + bmi + ".");
+
         }
     }
 }
